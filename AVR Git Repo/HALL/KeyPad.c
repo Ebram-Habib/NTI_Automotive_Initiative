@@ -22,10 +22,15 @@ void KEYPAD_Init(void)
 	DIO_voidSetPinDirection(pPORTD, pin6, input);
 	DIO_voidSetPinDirection(pPORTD, pin7, input);
 
-	DIO_voidSetPinValue(pPORTC, pin2, low);
-	DIO_voidSetPinValue(pPORTC, pin3, low);
-	DIO_voidSetPinValue(pPORTC, pin4, low);
-	DIO_voidSetPinValue(pPORTC, pin5, low);
+	DIO_voidSetPinValue(pPORTC, pin2, high);
+	DIO_voidSetPinValue(pPORTC, pin3, high);
+	DIO_voidSetPinValue(pPORTC, pin4, high);
+	DIO_voidSetPinValue(pPORTC, pin5, high);
+
+	DIO_voidSetPinValue(pPORTD, pin3, high);
+	DIO_voidSetPinValue(pPORTD, pin5, high);
+	DIO_voidSetPinValue(pPORTD, pin6, high);
+	DIO_voidSetPinValue(pPORTD, pin7, high);
 }
 
 u8 KEYPAD_Get_Pressed_Key(void)
@@ -38,18 +43,18 @@ u8 KEYPAD_Get_Pressed_Key(void)
 	{
 		for(i = 0; i<SIZE; i++)
 		{
-			DIO_voidSetPinValue(pPORTC, rows[i], high);
+			DIO_voidSetPinValue(pPORTC, rows[i], low);
 
 			for(j = 0; j<SIZE; j++)
 			{
 				if(DIO_voidGetPinValue(pPORTD, cols[j]) == low)
 				{
-					return ((rows[i]*SIZE) + cols[j]+1);
+					return ((i*SIZE) + (j+1));
 				}
 			}
+			DIO_voidSetPinValue(pPORTC, rows[i], high);
+			_delay_ms(5);
 		}
-		DIO_voidSetPinValue(pPORTC, rows[i], low);
-		_delay_ms(5);
 	}
 
 
