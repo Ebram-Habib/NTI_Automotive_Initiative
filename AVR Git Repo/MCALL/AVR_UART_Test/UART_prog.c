@@ -10,6 +10,13 @@
 #include "UART_int.h"
 #include "UART_config.h"
 #include "UART_priv.h"
+#include <avr/interrupt.h>
+
+
+/*******************************************************************************
+ *                      Global Variables	                                   *
+ *******************************************************************************/
+static void(*ptrCallBack)(u8) = NULL_PTR;
 
 /*******************************************************************************
  *                      Functions Prototypes                                   *
@@ -31,18 +38,17 @@ void UART_init(void)
 	UCSRA_REG = (UART_TRANSMISSION_SPEED<<U2X_BIT);
 
 	/************************** UCSRB Description **************************
-	 * RXCIE = 1 Enable USART RX Complete Interrupt Enable
-	 * TXCIE = 1 Enable USART Tx Complete Interrupt Enable
-	 * UDRIE = 1 Enable USART Data Register Empty Interrupt Enable
+	 * RXCIE = 0 disable USART RX Complete Interrupt Enable
+	 * TXCIE = 0 disable USART Tx Complete Interrupt Enable
+	 * UDRIE = 0 disable USART Data Register Empty Interrupt Enable
 	 * RXEN  = 1 Receiver Enable
 	 * RXEN  = 1 Transmitter Enable
 	 * UCSZ2 = 5:9 bits data modes
 	 * RXB8 & TXB8 not used for 8-bit data mode
 	 ***********************************************************************/
-//	regVal = 0;
-//	regVal = (1<<RXCIE_BIT) | (1<<TXCIE_BIT) | (1<<UDRIE_BIT) | (1<<RXEN_BIT) | (1<<TXEN_BIT) | ((UART_BitData>>2)<<UCSZ2_BIT);
-//	UCSRB_REG = regVal;
-	UCSRB_REG = (1<<RXEN_BIT) | (1<<TXEN_BIT) | ((UART_BitData>>2)<<UCSZ2_BIT);
+	regVal = 0;
+	regVal = (1<<RXEN_BIT) | (1<<TXEN_BIT) | ((UART_BitData>>2)<<UCSZ2_BIT);
+	UCSRB_REG = regVal;
 	/************************** UCSRC Description **************************
 	 * URSEL   = 1 The URSEL must be one when writing the UCSRC
 	 * UMSEL   = 0 Asynchronous Operation
@@ -52,7 +58,7 @@ void UART_init(void)
 	 * UCPOL   = 0 Used with the Synchronous operation only
 	 ***********************************************************************/
 	regVal = 0;
-	regVal= (1 <<URSEL_BIT) | ((UART_BitData & 0x02)<<UCSZ1_BIT) | ((UART_BitData & 0x01)<<UCSZ0_BIT) | ((UART_Parity & 0x01)<<UPM0_BIT) | ((UART_Parity & 0x02)<<UPM1_BIT) | ((UART_StopBit)<<USBS_BIT);
+	regVal= (1 <<URSEL_BIT) | (((UART_BitData & 0x02)>>1)<<UCSZ1_BIT) | ((UART_BitData & 0x01)<<UCSZ0_BIT) | ((UART_Parity & 0x01)<<UPM0_BIT) | ((UART_Parity & 0x02)<<UPM1_BIT) | ((UART_StopBit)<<USBS_BIT);
 	UCSRC_REG = regVal;
 
 	/* Calculate the UBRR register value */
@@ -87,7 +93,7 @@ void UART_sendByte(const u8 data)
  * Description :
  * Functional responsible for receive byte from another UART device.
  */
-void UART_recieveByte(u8* data)
+void UART_recieveByteSynchNonBlocking(u8* data)
 {
 	/* RXC flag is set when the UART receive data so wait until this flag is set to one */
 	while(BIT_IS_CLEAR(UCSRA_REG,RXC_BIT));
@@ -122,15 +128,33 @@ void UART_receiveString(u8 *Str) // Receive until #
 
 {
 	/* Receive the first byte */
-		UART_recieveByte(Str);
+		UART_recieveByteSynchNonBlocking(Str);
 
 		/* Receive the whole string until the '#' */
 		while(*Str != '#')
 		{
 			Str++;
-			UART_recieveByte(Str);
+			UART_recieveByteSynchNonBlocking(Str);
 		}
 
 		/* After receiving the whole string plus the '#', replace the '#' with '\0' */
 		*Str = '\0';
+}
+
+void UART_receiveByteAsynchCallBack(void(*ptrfn)(u8))
+{
+	ptrCallBack = ptrfn;
+	UCSRB_REG |= (1<<RXCIE_BIT);
+}
+
+ISR(USART_RXC_vect)
+{
+	static u8 byte = 0;
+
+	byte = UDR_REG;
+
+	if((*ptrCallBack) != NULL_PTR)
+	{
+		(*ptrCallBack)(byte);
+	}
 }

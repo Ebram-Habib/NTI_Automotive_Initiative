@@ -3,37 +3,41 @@ AVR_UART_Test.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000204  00000000  00000000  00000054  2**1
+  0 .text         000002f4  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .stab         00000654  00000000  00000000  00000258  2**2
+  1 .data         00000014  00800060  000002f4  00000388  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000004  00800074  00800074  0000039c  2**0
+                  ALLOC
+  3 .stab         00000978  00000000  00000000  0000039c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  2 .stabstr      00000463  00000000  00000000  000008ac  2**0
+  4 .stabstr      00000992  00000000  00000000  00000d14  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
-   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 1a 01 	jmp	0x234	; 0x234 <__vector_13>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
 
 00000054 <__ctors_end>:
   54:	11 24       	eor	r1, r1
@@ -42,373 +46,526 @@ Disassembly of section .text:
   5a:	d8 e0       	ldi	r29, 0x08	; 8
   5c:	de bf       	out	0x3e, r29	; 62
   5e:	cd bf       	out	0x3d, r28	; 61
-  60:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <main>
-  64:	0c 94 00 01 	jmp	0x200	; 0x200 <_exit>
 
-00000068 <__bad_interrupt>:
-  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e4 ef       	ldi	r30, 0xF4	; 244
+  68:	f2 e0       	ldi	r31, 0x02	; 2
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
 
-0000006c <GIE_Enable>:
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a4 37       	cpi	r26, 0x74	; 116
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a4 e7       	ldi	r26, 0x74	; 116
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a8 37       	cpi	r26, 0x78	; 120
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 54 01 	call	0x2a8	; 0x2a8 <main>
+  8a:	0c 94 78 01 	jmp	0x2f0	; 0x2f0 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <GIE_Enable>:
 
 #include "GIE_priv.h"
 #include "GIE_int.h"
 
 void GIE_Enable(void)
 {
-  6c:	df 93       	push	r29
-  6e:	cf 93       	push	r28
-  70:	cd b7       	in	r28, 0x3d	; 61
-  72:	de b7       	in	r29, 0x3e	; 62
+  92:	df 93       	push	r29
+  94:	cf 93       	push	r28
+  96:	cd b7       	in	r28, 0x3d	; 61
+  98:	de b7       	in	r29, 0x3e	; 62
 	SREG_REG |= (1<<I_Bit);
-  74:	af e5       	ldi	r26, 0x5F	; 95
-  76:	b0 e0       	ldi	r27, 0x00	; 0
-  78:	ef e5       	ldi	r30, 0x5F	; 95
-  7a:	f0 e0       	ldi	r31, 0x00	; 0
-  7c:	80 81       	ld	r24, Z
-  7e:	80 68       	ori	r24, 0x80	; 128
-  80:	8c 93       	st	X, r24
+  9a:	af e5       	ldi	r26, 0x5F	; 95
+  9c:	b0 e0       	ldi	r27, 0x00	; 0
+  9e:	ef e5       	ldi	r30, 0x5F	; 95
+  a0:	f0 e0       	ldi	r31, 0x00	; 0
+  a2:	80 81       	ld	r24, Z
+  a4:	80 68       	ori	r24, 0x80	; 128
+  a6:	8c 93       	st	X, r24
 }
-  82:	cf 91       	pop	r28
-  84:	df 91       	pop	r29
-  86:	08 95       	ret
+  a8:	cf 91       	pop	r28
+  aa:	df 91       	pop	r29
+  ac:	08 95       	ret
 
-00000088 <GIE_Disable>:
+000000ae <GIE_Disable>:
 
 void GIE_Disable(void)
 {
-  88:	df 93       	push	r29
-  8a:	cf 93       	push	r28
-  8c:	cd b7       	in	r28, 0x3d	; 61
-  8e:	de b7       	in	r29, 0x3e	; 62
+  ae:	df 93       	push	r29
+  b0:	cf 93       	push	r28
+  b2:	cd b7       	in	r28, 0x3d	; 61
+  b4:	de b7       	in	r29, 0x3e	; 62
 	SREG_REG &= ~(1<<I_Bit);
-  90:	af e5       	ldi	r26, 0x5F	; 95
-  92:	b0 e0       	ldi	r27, 0x00	; 0
-  94:	ef e5       	ldi	r30, 0x5F	; 95
-  96:	f0 e0       	ldi	r31, 0x00	; 0
-  98:	80 81       	ld	r24, Z
-  9a:	8f 77       	andi	r24, 0x7F	; 127
-  9c:	8c 93       	st	X, r24
+  b6:	af e5       	ldi	r26, 0x5F	; 95
+  b8:	b0 e0       	ldi	r27, 0x00	; 0
+  ba:	ef e5       	ldi	r30, 0x5F	; 95
+  bc:	f0 e0       	ldi	r31, 0x00	; 0
+  be:	80 81       	ld	r24, Z
+  c0:	8f 77       	andi	r24, 0x7F	; 127
+  c2:	8c 93       	st	X, r24
 }
-  9e:	cf 91       	pop	r28
-  a0:	df 91       	pop	r29
-  a2:	08 95       	ret
+  c4:	cf 91       	pop	r28
+  c6:	df 91       	pop	r29
+  c8:	08 95       	ret
 
-000000a4 <UART_init>:
+000000ca <UART_init>:
  * 1. Setup the Frame format like number of data bits, parity bit type and number of stop bits.
  * 2. Enable the UART.
  * 3. Setup the UART baud rate.
  */
 void UART_init(void)
 {
-  a4:	df 93       	push	r29
-  a6:	cf 93       	push	r28
-  a8:	00 d0       	rcall	.+0      	; 0xaa <UART_init+0x6>
-  aa:	0f 92       	push	r0
-  ac:	cd b7       	in	r28, 0x3d	; 61
-  ae:	de b7       	in	r29, 0x3e	; 62
+  ca:	df 93       	push	r29
+  cc:	cf 93       	push	r28
+  ce:	00 d0       	rcall	.+0      	; 0xd0 <UART_init+0x6>
+  d0:	0f 92       	push	r0
+  d2:	cd b7       	in	r28, 0x3d	; 61
+  d4:	de b7       	in	r29, 0x3e	; 62
 	u8 regVal = 0;
-  b0:	1b 82       	std	Y+3, r1	; 0x03
+  d6:	1b 82       	std	Y+3, r1	; 0x03
 	u16 ubrr_value = 0;
-  b2:	1a 82       	std	Y+2, r1	; 0x02
-  b4:	19 82       	std	Y+1, r1	; 0x01
+  d8:	1a 82       	std	Y+2, r1	; 0x02
+  da:	19 82       	std	Y+1, r1	; 0x01
 
 	/* U2X = 1 for double transmission speed */
 	UCSRA_REG = (UART_TRANSMISSION_SPEED<<U2X_BIT);
-  b6:	eb e2       	ldi	r30, 0x2B	; 43
-  b8:	f0 e0       	ldi	r31, 0x00	; 0
-  ba:	82 e0       	ldi	r24, 0x02	; 2
-  bc:	80 83       	st	Z, r24
+  dc:	eb e2       	ldi	r30, 0x2B	; 43
+  de:	f0 e0       	ldi	r31, 0x00	; 0
+  e0:	82 e0       	ldi	r24, 0x02	; 2
+  e2:	80 83       	st	Z, r24
+	 * RXEN  = 1 Receiver Enable
+	 * RXEN  = 1 Transmitter Enable
+	 * UCSZ2 = 5:9 bits data modes
 	 * RXB8 & TXB8 not used for 8-bit data mode
 	 ***********************************************************************/
-//	regVal = 0;
-//	regVal = (1<<RXCIE_BIT) | (1<<TXCIE_BIT) | (1<<UDRIE_BIT) | (1<<RXEN_BIT) | (1<<TXEN_BIT) | ((UART_BitData>>2)<<UCSZ2_BIT);
-//	UCSRB_REG = regVal;
-	UCSRB_REG = (1<<RXEN_BIT) | (1<<TXEN_BIT) | ((UART_BitData>>2)<<UCSZ2_BIT);
-  be:	ea e2       	ldi	r30, 0x2A	; 42
-  c0:	f0 e0       	ldi	r31, 0x00	; 0
-  c2:	88 e1       	ldi	r24, 0x18	; 24
-  c4:	80 83       	st	Z, r24
+	regVal = 0;
+  e4:	1b 82       	std	Y+3, r1	; 0x03
+	regVal = (1<<RXEN_BIT) | (1<<TXEN_BIT) | ((UART_BitData>>2)<<UCSZ2_BIT);
+  e6:	88 e1       	ldi	r24, 0x18	; 24
+  e8:	8b 83       	std	Y+3, r24	; 0x03
+	UCSRB_REG = regVal;
+  ea:	ea e2       	ldi	r30, 0x2A	; 42
+  ec:	f0 e0       	ldi	r31, 0x00	; 0
+  ee:	8b 81       	ldd	r24, Y+3	; 0x03
+  f0:	80 83       	st	Z, r24
 	 * UPM1:0  = parity bit
 	 * USBS    = stop bit
 	 * UCSZ1:0 = 5:9 bits data modes
 	 * UCPOL   = 0 Used with the Synchronous operation only
 	 ***********************************************************************/
 	regVal = 0;
-  c6:	1b 82       	std	Y+3, r1	; 0x03
-	regVal= (1 <<URSEL_BIT) | ((UART_BitData & 0x02)<<UCSZ1_BIT) | ((UART_BitData & 0x01)<<UCSZ0_BIT) | ((UART_Parity & 0x01)<<UPM0_BIT) | ((UART_Parity & 0x02)<<UPM1_BIT) | ((UART_StopBit)<<USBS_BIT);
-  c8:	8a e8       	ldi	r24, 0x8A	; 138
-  ca:	8b 83       	std	Y+3, r24	; 0x03
+  f2:	1b 82       	std	Y+3, r1	; 0x03
+	regVal= (1 <<URSEL_BIT) | (((UART_BitData & 0x02)>>1)<<UCSZ1_BIT) | ((UART_BitData & 0x01)<<UCSZ0_BIT) | ((UART_Parity & 0x01)<<UPM0_BIT) | ((UART_Parity & 0x02)<<UPM1_BIT) | ((UART_StopBit)<<USBS_BIT);
+  f4:	86 e8       	ldi	r24, 0x86	; 134
+  f6:	8b 83       	std	Y+3, r24	; 0x03
 	UCSRC_REG = regVal;
-  cc:	e0 e4       	ldi	r30, 0x40	; 64
-  ce:	f0 e0       	ldi	r31, 0x00	; 0
-  d0:	8b 81       	ldd	r24, Y+3	; 0x03
-  d2:	80 83       	st	Z, r24
+  f8:	e0 e4       	ldi	r30, 0x40	; 64
+  fa:	f0 e0       	ldi	r31, 0x00	; 0
+  fc:	8b 81       	ldd	r24, Y+3	; 0x03
+  fe:	80 83       	st	Z, r24
 
 	/* Calculate the UBRR register value */
 	ubrr_value = (u16)(((F_CPU / (UART_BaudRate * 8UL))) - 1);
-  d4:	8f ec       	ldi	r24, 0xCF	; 207
-  d6:	90 e0       	ldi	r25, 0x00	; 0
-  d8:	9a 83       	std	Y+2, r25	; 0x02
-  da:	89 83       	std	Y+1, r24	; 0x01
+ 100:	8f ec       	ldi	r24, 0xCF	; 207
+ 102:	90 e0       	ldi	r25, 0x00	; 0
+ 104:	9a 83       	std	Y+2, r25	; 0x02
+ 106:	89 83       	std	Y+1, r24	; 0x01
 
 	/* First 8 bits from the BAUD_PRESCALE inside UBRRL and last 4 bits in UBRRH*/
 	UBRRH_REG = ubrr_value>>8;
-  dc:	e0 e4       	ldi	r30, 0x40	; 64
-  de:	f0 e0       	ldi	r31, 0x00	; 0
-  e0:	89 81       	ldd	r24, Y+1	; 0x01
-  e2:	9a 81       	ldd	r25, Y+2	; 0x02
-  e4:	89 2f       	mov	r24, r25
-  e6:	99 27       	eor	r25, r25
-  e8:	80 83       	st	Z, r24
+ 108:	e0 e4       	ldi	r30, 0x40	; 64
+ 10a:	f0 e0       	ldi	r31, 0x00	; 0
+ 10c:	89 81       	ldd	r24, Y+1	; 0x01
+ 10e:	9a 81       	ldd	r25, Y+2	; 0x02
+ 110:	89 2f       	mov	r24, r25
+ 112:	99 27       	eor	r25, r25
+ 114:	80 83       	st	Z, r24
 	UBRRL_REG = ubrr_value;
-  ea:	e9 e2       	ldi	r30, 0x29	; 41
-  ec:	f0 e0       	ldi	r31, 0x00	; 0
-  ee:	89 81       	ldd	r24, Y+1	; 0x01
-  f0:	80 83       	st	Z, r24
+ 116:	e9 e2       	ldi	r30, 0x29	; 41
+ 118:	f0 e0       	ldi	r31, 0x00	; 0
+ 11a:	89 81       	ldd	r24, Y+1	; 0x01
+ 11c:	80 83       	st	Z, r24
 
 }
-  f2:	0f 90       	pop	r0
-  f4:	0f 90       	pop	r0
-  f6:	0f 90       	pop	r0
-  f8:	cf 91       	pop	r28
-  fa:	df 91       	pop	r29
-  fc:	08 95       	ret
+ 11e:	0f 90       	pop	r0
+ 120:	0f 90       	pop	r0
+ 122:	0f 90       	pop	r0
+ 124:	cf 91       	pop	r28
+ 126:	df 91       	pop	r29
+ 128:	08 95       	ret
 
-000000fe <UART_sendByte>:
+0000012a <UART_sendByte>:
 /*
  * Description :
  * Functional responsible for send byte to another UART device.
  */
 void UART_sendByte(const u8 data)
 {
-  fe:	df 93       	push	r29
- 100:	cf 93       	push	r28
- 102:	0f 92       	push	r0
- 104:	cd b7       	in	r28, 0x3d	; 61
- 106:	de b7       	in	r29, 0x3e	; 62
- 108:	89 83       	std	Y+1, r24	; 0x01
+ 12a:	df 93       	push	r29
+ 12c:	cf 93       	push	r28
+ 12e:	0f 92       	push	r0
+ 130:	cd b7       	in	r28, 0x3d	; 61
+ 132:	de b7       	in	r29, 0x3e	; 62
+ 134:	89 83       	std	Y+1, r24	; 0x01
 	/*
 	 * UDRE flag is set when the Tx buffer (UDR) is empty and ready for
 	 * transmitting a new byte so wait until this flag is set to one
 	 */
 	while(BIT_IS_CLEAR(UCSRA_REG,UDRE_BIT));
- 10a:	eb e2       	ldi	r30, 0x2B	; 43
- 10c:	f0 e0       	ldi	r31, 0x00	; 0
- 10e:	80 81       	ld	r24, Z
- 110:	88 2f       	mov	r24, r24
- 112:	90 e0       	ldi	r25, 0x00	; 0
- 114:	80 72       	andi	r24, 0x20	; 32
- 116:	90 70       	andi	r25, 0x00	; 0
- 118:	00 97       	sbiw	r24, 0x00	; 0
- 11a:	b9 f3       	breq	.-18     	; 0x10a <UART_sendByte+0xc>
+ 136:	eb e2       	ldi	r30, 0x2B	; 43
+ 138:	f0 e0       	ldi	r31, 0x00	; 0
+ 13a:	80 81       	ld	r24, Z
+ 13c:	88 2f       	mov	r24, r24
+ 13e:	90 e0       	ldi	r25, 0x00	; 0
+ 140:	80 72       	andi	r24, 0x20	; 32
+ 142:	90 70       	andi	r25, 0x00	; 0
+ 144:	00 97       	sbiw	r24, 0x00	; 0
+ 146:	b9 f3       	breq	.-18     	; 0x136 <UART_sendByte+0xc>
 
 	/*
 	 * Put the required data in the UDR register and it also clear the UDRE flag as
 	 * the UDR register is not empty now
 	 */
 	UDR_REG = data;
- 11c:	ec e2       	ldi	r30, 0x2C	; 44
- 11e:	f0 e0       	ldi	r31, 0x00	; 0
- 120:	89 81       	ldd	r24, Y+1	; 0x01
- 122:	80 83       	st	Z, r24
+ 148:	ec e2       	ldi	r30, 0x2C	; 44
+ 14a:	f0 e0       	ldi	r31, 0x00	; 0
+ 14c:	89 81       	ldd	r24, Y+1	; 0x01
+ 14e:	80 83       	st	Z, r24
 }
- 124:	0f 90       	pop	r0
- 126:	cf 91       	pop	r28
- 128:	df 91       	pop	r29
- 12a:	08 95       	ret
+ 150:	0f 90       	pop	r0
+ 152:	cf 91       	pop	r28
+ 154:	df 91       	pop	r29
+ 156:	08 95       	ret
 
-0000012c <UART_recieveByte>:
+00000158 <UART_recieveByteSynchNonBlocking>:
 /*
  * Description :
  * Functional responsible for receive byte from another UART device.
  */
-void UART_recieveByte(u8* data)
+void UART_recieveByteSynchNonBlocking(u8* data)
 {
- 12c:	df 93       	push	r29
- 12e:	cf 93       	push	r28
- 130:	00 d0       	rcall	.+0      	; 0x132 <UART_recieveByte+0x6>
- 132:	cd b7       	in	r28, 0x3d	; 61
- 134:	de b7       	in	r29, 0x3e	; 62
- 136:	9a 83       	std	Y+2, r25	; 0x02
- 138:	89 83       	std	Y+1, r24	; 0x01
+ 158:	df 93       	push	r29
+ 15a:	cf 93       	push	r28
+ 15c:	00 d0       	rcall	.+0      	; 0x15e <UART_recieveByteSynchNonBlocking+0x6>
+ 15e:	cd b7       	in	r28, 0x3d	; 61
+ 160:	de b7       	in	r29, 0x3e	; 62
+ 162:	9a 83       	std	Y+2, r25	; 0x02
+ 164:	89 83       	std	Y+1, r24	; 0x01
 	/* RXC flag is set when the UART receive data so wait until this flag is set to one */
 	while(BIT_IS_CLEAR(UCSRA_REG,RXC_BIT));
- 13a:	eb e2       	ldi	r30, 0x2B	; 43
- 13c:	f0 e0       	ldi	r31, 0x00	; 0
- 13e:	80 81       	ld	r24, Z
- 140:	88 23       	and	r24, r24
- 142:	dc f7       	brge	.-10     	; 0x13a <UART_recieveByte+0xe>
+ 166:	eb e2       	ldi	r30, 0x2B	; 43
+ 168:	f0 e0       	ldi	r31, 0x00	; 0
+ 16a:	80 81       	ld	r24, Z
+ 16c:	88 23       	and	r24, r24
+ 16e:	dc f7       	brge	.-10     	; 0x166 <UART_recieveByteSynchNonBlocking+0xe>
 
 	/*
 	 * Read the received data from the Rx buffer (UDR)
 	 * The RXC flag will be cleared after read the data
 	 */
 	*data = UDR_REG;
- 144:	ec e2       	ldi	r30, 0x2C	; 44
- 146:	f0 e0       	ldi	r31, 0x00	; 0
- 148:	80 81       	ld	r24, Z
- 14a:	e9 81       	ldd	r30, Y+1	; 0x01
- 14c:	fa 81       	ldd	r31, Y+2	; 0x02
- 14e:	80 83       	st	Z, r24
+ 170:	ec e2       	ldi	r30, 0x2C	; 44
+ 172:	f0 e0       	ldi	r31, 0x00	; 0
+ 174:	80 81       	ld	r24, Z
+ 176:	e9 81       	ldd	r30, Y+1	; 0x01
+ 178:	fa 81       	ldd	r31, Y+2	; 0x02
+ 17a:	80 83       	st	Z, r24
 }
- 150:	0f 90       	pop	r0
- 152:	0f 90       	pop	r0
- 154:	cf 91       	pop	r28
- 156:	df 91       	pop	r29
- 158:	08 95       	ret
+ 17c:	0f 90       	pop	r0
+ 17e:	0f 90       	pop	r0
+ 180:	cf 91       	pop	r28
+ 182:	df 91       	pop	r29
+ 184:	08 95       	ret
 
-0000015a <UART_sendString>:
+00000186 <UART_sendString>:
 /*
  * Description :
  * Send the required string through UART to the other UART device.
  */
 void UART_sendString(const u8 *Str)
 {
- 15a:	df 93       	push	r29
- 15c:	cf 93       	push	r28
- 15e:	00 d0       	rcall	.+0      	; 0x160 <UART_sendString+0x6>
- 160:	cd b7       	in	r28, 0x3d	; 61
- 162:	de b7       	in	r29, 0x3e	; 62
- 164:	9a 83       	std	Y+2, r25	; 0x02
- 166:	89 83       	std	Y+1, r24	; 0x01
- 168:	0a c0       	rjmp	.+20     	; 0x17e <UART_sendString+0x24>
+ 186:	df 93       	push	r29
+ 188:	cf 93       	push	r28
+ 18a:	00 d0       	rcall	.+0      	; 0x18c <UART_sendString+0x6>
+ 18c:	cd b7       	in	r28, 0x3d	; 61
+ 18e:	de b7       	in	r29, 0x3e	; 62
+ 190:	9a 83       	std	Y+2, r25	; 0x02
+ 192:	89 83       	std	Y+1, r24	; 0x01
+ 194:	0a c0       	rjmp	.+20     	; 0x1aa <UART_sendString+0x24>
 
 	/* Sending the whole string one character after the other till we find the null character */
 	while(*Str != '\0')
 	{
 		UART_sendByte(*Str);
- 16a:	e9 81       	ldd	r30, Y+1	; 0x01
- 16c:	fa 81       	ldd	r31, Y+2	; 0x02
- 16e:	80 81       	ld	r24, Z
- 170:	0e 94 7f 00 	call	0xfe	; 0xfe <UART_sendByte>
+ 196:	e9 81       	ldd	r30, Y+1	; 0x01
+ 198:	fa 81       	ldd	r31, Y+2	; 0x02
+ 19a:	80 81       	ld	r24, Z
+ 19c:	0e 94 95 00 	call	0x12a	; 0x12a <UART_sendByte>
 		Str++;
- 174:	89 81       	ldd	r24, Y+1	; 0x01
- 176:	9a 81       	ldd	r25, Y+2	; 0x02
- 178:	01 96       	adiw	r24, 0x01	; 1
- 17a:	9a 83       	std	Y+2, r25	; 0x02
- 17c:	89 83       	std	Y+1, r24	; 0x01
+ 1a0:	89 81       	ldd	r24, Y+1	; 0x01
+ 1a2:	9a 81       	ldd	r25, Y+2	; 0x02
+ 1a4:	01 96       	adiw	r24, 0x01	; 1
+ 1a6:	9a 83       	std	Y+2, r25	; 0x02
+ 1a8:	89 83       	std	Y+1, r24	; 0x01
  */
 void UART_sendString(const u8 *Str)
 {
 
 	/* Sending the whole string one character after the other till we find the null character */
 	while(*Str != '\0')
- 17e:	e9 81       	ldd	r30, Y+1	; 0x01
- 180:	fa 81       	ldd	r31, Y+2	; 0x02
- 182:	80 81       	ld	r24, Z
- 184:	88 23       	and	r24, r24
- 186:	89 f7       	brne	.-30     	; 0x16a <UART_sendString+0x10>
+ 1aa:	e9 81       	ldd	r30, Y+1	; 0x01
+ 1ac:	fa 81       	ldd	r31, Y+2	; 0x02
+ 1ae:	80 81       	ld	r24, Z
+ 1b0:	88 23       	and	r24, r24
+ 1b2:	89 f7       	brne	.-30     	; 0x196 <UART_sendString+0x10>
 	{
 		UART_sendByte(*Str);
 		Str++;
 	}
 }
- 188:	0f 90       	pop	r0
- 18a:	0f 90       	pop	r0
- 18c:	cf 91       	pop	r28
- 18e:	df 91       	pop	r29
- 190:	08 95       	ret
+ 1b4:	0f 90       	pop	r0
+ 1b6:	0f 90       	pop	r0
+ 1b8:	cf 91       	pop	r28
+ 1ba:	df 91       	pop	r29
+ 1bc:	08 95       	ret
 
-00000192 <UART_receiveString>:
+000001be <UART_receiveString>:
  * Description :
  * Receive the required string until the '#' symbol through UART from the other UART device.
  */
 void UART_receiveString(u8 *Str) // Receive until #
 
 {
- 192:	df 93       	push	r29
- 194:	cf 93       	push	r28
- 196:	00 d0       	rcall	.+0      	; 0x198 <UART_receiveString+0x6>
- 198:	cd b7       	in	r28, 0x3d	; 61
- 19a:	de b7       	in	r29, 0x3e	; 62
- 19c:	9a 83       	std	Y+2, r25	; 0x02
- 19e:	89 83       	std	Y+1, r24	; 0x01
+ 1be:	df 93       	push	r29
+ 1c0:	cf 93       	push	r28
+ 1c2:	00 d0       	rcall	.+0      	; 0x1c4 <UART_receiveString+0x6>
+ 1c4:	cd b7       	in	r28, 0x3d	; 61
+ 1c6:	de b7       	in	r29, 0x3e	; 62
+ 1c8:	9a 83       	std	Y+2, r25	; 0x02
+ 1ca:	89 83       	std	Y+1, r24	; 0x01
 	/* Receive the first byte */
-		UART_recieveByte(Str);
- 1a0:	89 81       	ldd	r24, Y+1	; 0x01
- 1a2:	9a 81       	ldd	r25, Y+2	; 0x02
- 1a4:	0e 94 96 00 	call	0x12c	; 0x12c <UART_recieveByte>
- 1a8:	09 c0       	rjmp	.+18     	; 0x1bc <UART_receiveString+0x2a>
+		UART_recieveByteSynchNonBlocking(Str);
+ 1cc:	89 81       	ldd	r24, Y+1	; 0x01
+ 1ce:	9a 81       	ldd	r25, Y+2	; 0x02
+ 1d0:	0e 94 ac 00 	call	0x158	; 0x158 <UART_recieveByteSynchNonBlocking>
+ 1d4:	09 c0       	rjmp	.+18     	; 0x1e8 <UART_receiveString+0x2a>
 
 		/* Receive the whole string until the '#' */
 		while(*Str != '#')
 		{
 			Str++;
- 1aa:	89 81       	ldd	r24, Y+1	; 0x01
- 1ac:	9a 81       	ldd	r25, Y+2	; 0x02
- 1ae:	01 96       	adiw	r24, 0x01	; 1
- 1b0:	9a 83       	std	Y+2, r25	; 0x02
- 1b2:	89 83       	std	Y+1, r24	; 0x01
-			UART_recieveByte(Str);
- 1b4:	89 81       	ldd	r24, Y+1	; 0x01
- 1b6:	9a 81       	ldd	r25, Y+2	; 0x02
- 1b8:	0e 94 96 00 	call	0x12c	; 0x12c <UART_recieveByte>
+ 1d6:	89 81       	ldd	r24, Y+1	; 0x01
+ 1d8:	9a 81       	ldd	r25, Y+2	; 0x02
+ 1da:	01 96       	adiw	r24, 0x01	; 1
+ 1dc:	9a 83       	std	Y+2, r25	; 0x02
+ 1de:	89 83       	std	Y+1, r24	; 0x01
+			UART_recieveByteSynchNonBlocking(Str);
+ 1e0:	89 81       	ldd	r24, Y+1	; 0x01
+ 1e2:	9a 81       	ldd	r25, Y+2	; 0x02
+ 1e4:	0e 94 ac 00 	call	0x158	; 0x158 <UART_recieveByteSynchNonBlocking>
 {
 	/* Receive the first byte */
-		UART_recieveByte(Str);
+		UART_recieveByteSynchNonBlocking(Str);
 
 		/* Receive the whole string until the '#' */
 		while(*Str != '#')
- 1bc:	e9 81       	ldd	r30, Y+1	; 0x01
- 1be:	fa 81       	ldd	r31, Y+2	; 0x02
- 1c0:	80 81       	ld	r24, Z
- 1c2:	83 32       	cpi	r24, 0x23	; 35
- 1c4:	91 f7       	brne	.-28     	; 0x1aa <UART_receiveString+0x18>
+ 1e8:	e9 81       	ldd	r30, Y+1	; 0x01
+ 1ea:	fa 81       	ldd	r31, Y+2	; 0x02
+ 1ec:	80 81       	ld	r24, Z
+ 1ee:	83 32       	cpi	r24, 0x23	; 35
+ 1f0:	91 f7       	brne	.-28     	; 0x1d6 <UART_receiveString+0x18>
 			Str++;
-			UART_recieveByte(Str);
+			UART_recieveByteSynchNonBlocking(Str);
 		}
 
 		/* After receiving the whole string plus the '#', replace the '#' with '\0' */
 		*Str = '\0';
- 1c6:	e9 81       	ldd	r30, Y+1	; 0x01
- 1c8:	fa 81       	ldd	r31, Y+2	; 0x02
- 1ca:	10 82       	st	Z, r1
+ 1f2:	e9 81       	ldd	r30, Y+1	; 0x01
+ 1f4:	fa 81       	ldd	r31, Y+2	; 0x02
+ 1f6:	10 82       	st	Z, r1
 }
- 1cc:	0f 90       	pop	r0
- 1ce:	0f 90       	pop	r0
- 1d0:	cf 91       	pop	r28
- 1d2:	df 91       	pop	r29
- 1d4:	08 95       	ret
+ 1f8:	0f 90       	pop	r0
+ 1fa:	0f 90       	pop	r0
+ 1fc:	cf 91       	pop	r28
+ 1fe:	df 91       	pop	r29
+ 200:	08 95       	ret
 
-000001d6 <main>:
-#include "std_types.h"
-#include "UART_int.h"
-#include "GIE_int.h"
+00000202 <UART_receiveByteAsynchCallBack>:
+
+void UART_receiveByteAsynchCallBack(void(*ptrfn)(u8))
+{
+ 202:	df 93       	push	r29
+ 204:	cf 93       	push	r28
+ 206:	00 d0       	rcall	.+0      	; 0x208 <UART_receiveByteAsynchCallBack+0x6>
+ 208:	cd b7       	in	r28, 0x3d	; 61
+ 20a:	de b7       	in	r29, 0x3e	; 62
+ 20c:	9a 83       	std	Y+2, r25	; 0x02
+ 20e:	89 83       	std	Y+1, r24	; 0x01
+	ptrCallBack = ptrfn;
+ 210:	89 81       	ldd	r24, Y+1	; 0x01
+ 212:	9a 81       	ldd	r25, Y+2	; 0x02
+ 214:	90 93 75 00 	sts	0x0075, r25
+ 218:	80 93 74 00 	sts	0x0074, r24
+	UCSRB_REG |= (1<<RXCIE_BIT);
+ 21c:	aa e2       	ldi	r26, 0x2A	; 42
+ 21e:	b0 e0       	ldi	r27, 0x00	; 0
+ 220:	ea e2       	ldi	r30, 0x2A	; 42
+ 222:	f0 e0       	ldi	r31, 0x00	; 0
+ 224:	80 81       	ld	r24, Z
+ 226:	80 68       	ori	r24, 0x80	; 128
+ 228:	8c 93       	st	X, r24
+}
+ 22a:	0f 90       	pop	r0
+ 22c:	0f 90       	pop	r0
+ 22e:	cf 91       	pop	r28
+ 230:	df 91       	pop	r29
+ 232:	08 95       	ret
+
+00000234 <__vector_13>:
+
+ISR(USART_RXC_vect)
+{
+ 234:	1f 92       	push	r1
+ 236:	0f 92       	push	r0
+ 238:	0f b6       	in	r0, 0x3f	; 63
+ 23a:	0f 92       	push	r0
+ 23c:	11 24       	eor	r1, r1
+ 23e:	2f 93       	push	r18
+ 240:	3f 93       	push	r19
+ 242:	4f 93       	push	r20
+ 244:	5f 93       	push	r21
+ 246:	6f 93       	push	r22
+ 248:	7f 93       	push	r23
+ 24a:	8f 93       	push	r24
+ 24c:	9f 93       	push	r25
+ 24e:	af 93       	push	r26
+ 250:	bf 93       	push	r27
+ 252:	ef 93       	push	r30
+ 254:	ff 93       	push	r31
+ 256:	df 93       	push	r29
+ 258:	cf 93       	push	r28
+ 25a:	cd b7       	in	r28, 0x3d	; 61
+ 25c:	de b7       	in	r29, 0x3e	; 62
+	static u8 byte = 0;
+
+	byte = UDR_REG;
+ 25e:	ec e2       	ldi	r30, 0x2C	; 44
+ 260:	f0 e0       	ldi	r31, 0x00	; 0
+ 262:	80 81       	ld	r24, Z
+ 264:	80 93 76 00 	sts	0x0076, r24
+
+	if((*ptrCallBack) != NULL_PTR)
+ 268:	80 91 74 00 	lds	r24, 0x0074
+ 26c:	90 91 75 00 	lds	r25, 0x0075
+ 270:	00 97       	sbiw	r24, 0x00	; 0
+ 272:	39 f0       	breq	.+14     	; 0x282 <__vector_13+0x4e>
+	{
+		(*ptrCallBack)(byte);
+ 274:	e0 91 74 00 	lds	r30, 0x0074
+ 278:	f0 91 75 00 	lds	r31, 0x0075
+ 27c:	80 91 76 00 	lds	r24, 0x0076
+ 280:	09 95       	icall
+	}
+}
+ 282:	cf 91       	pop	r28
+ 284:	df 91       	pop	r29
+ 286:	ff 91       	pop	r31
+ 288:	ef 91       	pop	r30
+ 28a:	bf 91       	pop	r27
+ 28c:	af 91       	pop	r26
+ 28e:	9f 91       	pop	r25
+ 290:	8f 91       	pop	r24
+ 292:	7f 91       	pop	r23
+ 294:	6f 91       	pop	r22
+ 296:	5f 91       	pop	r21
+ 298:	4f 91       	pop	r20
+ 29a:	3f 91       	pop	r19
+ 29c:	2f 91       	pop	r18
+ 29e:	0f 90       	pop	r0
+ 2a0:	0f be       	out	0x3f, r0	; 63
+ 2a2:	0f 90       	pop	r0
+ 2a4:	1f 90       	pop	r1
+ 2a6:	18 95       	reti
+
+000002a8 <main>:
+u8 data = 0;
+
+void getbyte(u8 byte);
 
 int main()
 {
- 1d6:	df 93       	push	r29
- 1d8:	cf 93       	push	r28
- 1da:	cd b7       	in	r28, 0x3d	; 61
- 1dc:	de b7       	in	r29, 0x3e	; 62
- 1de:	65 97       	sbiw	r28, 0x15	; 21
- 1e0:	0f b6       	in	r0, 0x3f	; 63
- 1e2:	f8 94       	cli
- 1e4:	de bf       	out	0x3e, r29	; 62
- 1e6:	0f be       	out	0x3f, r0	; 63
- 1e8:	cd bf       	out	0x3d, r28	; 61
-
-	u8 Str[20];
-	u8 data = 0;
- 1ea:	1d 8a       	std	Y+21, r1	; 0x15
+ 2a8:	df 93       	push	r29
+ 2aa:	cf 93       	push	r28
+ 2ac:	cd b7       	in	r28, 0x3d	; 61
+ 2ae:	de b7       	in	r29, 0x3e	; 62
+	GIE_Enable();
+ 2b0:	0e 94 49 00 	call	0x92	; 0x92 <GIE_Enable>
 
 	/* Initialize the UART driver with Baud-rate = 9600 bits/sec */
 	UART_init();
- 1ec:	0e 94 52 00 	call	0xa4	; 0xa4 <UART_init>
-
+ 2b4:	0e 94 65 00 	call	0xca	; 0xca <UART_init>
+	UART_receiveByteAsynchCallBack(getbyte); /* Receive Byte from Terminal */
+ 2b8:	8b e6       	ldi	r24, 0x6B	; 107
+ 2ba:	91 e0       	ldi	r25, 0x01	; 1
+ 2bc:	0e 94 01 01 	call	0x202	; 0x202 <UART_receiveByteAsynchCallBack>
 	while(1)
 	{
-		UART_recieveByte(&data); /* Receive Byte from Terminal */
- 1f0:	ce 01       	movw	r24, r28
- 1f2:	45 96       	adiw	r24, 0x15	; 21
- 1f4:	0e 94 96 00 	call	0x12c	; 0x12c <UART_recieveByte>
-		UART_sendByte(data);       /* Re-send the received byte to Terminal */
- 1f8:	8d 89       	ldd	r24, Y+21	; 0x15
- 1fa:	0e 94 7f 00 	call	0xfe	; 0xfe <UART_sendByte>
- 1fe:	f8 cf       	rjmp	.-16     	; 0x1f0 <main+0x1a>
+		if(data != 0)
+ 2c0:	80 91 77 00 	lds	r24, 0x0077
+ 2c4:	88 23       	and	r24, r24
+ 2c6:	e1 f3       	breq	.-8      	; 0x2c0 <main+0x18>
+		{
+			UART_sendByte(data);
+ 2c8:	80 91 77 00 	lds	r24, 0x0077
+ 2cc:	0e 94 95 00 	call	0x12a	; 0x12a <UART_sendByte>
+			data = 0;/* Re-send the received byte to Terminal */
+ 2d0:	10 92 77 00 	sts	0x0077, r1
+ 2d4:	f5 cf       	rjmp	.-22     	; 0x2c0 <main+0x18>
 
-00000200 <_exit>:
- 200:	f8 94       	cli
+000002d6 <getbyte>:
+		//			    UART_sendString(Str);        /* Re-send the string to Terminal */
+	}
+}
 
-00000202 <__stop_program>:
- 202:	ff cf       	rjmp	.-2      	; 0x202 <__stop_program>
+void getbyte(u8 byte)
+{
+ 2d6:	df 93       	push	r29
+ 2d8:	cf 93       	push	r28
+ 2da:	0f 92       	push	r0
+ 2dc:	cd b7       	in	r28, 0x3d	; 61
+ 2de:	de b7       	in	r29, 0x3e	; 62
+ 2e0:	89 83       	std	Y+1, r24	; 0x01
+	data = byte;
+ 2e2:	89 81       	ldd	r24, Y+1	; 0x01
+ 2e4:	80 93 77 00 	sts	0x0077, r24
+}
+ 2e8:	0f 90       	pop	r0
+ 2ea:	cf 91       	pop	r28
+ 2ec:	df 91       	pop	r29
+ 2ee:	08 95       	ret
+
+000002f0 <_exit>:
+ 2f0:	f8 94       	cli
+
+000002f2 <__stop_program>:
+ 2f2:	ff cf       	rjmp	.-2      	; 0x2f2 <__stop_program>

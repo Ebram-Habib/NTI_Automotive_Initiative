@@ -31,7 +31,7 @@ void UART_sendByte(const u8 data);
  * Description :
  * Functional responsible for receive byte from another UART device.
  */
-void UART_recieveByte(u8* data);
+void UART_recieveByteSynchNonBlocking(u8* data);
 
 /*
  * Description :
@@ -44,5 +44,11 @@ void UART_sendString(const u8 *Str);
  * Receive the required string until the '#' symbol through UART from the other UART device.
  */
 void UART_receiveString(u8 *Str); // Receive until #
+
+/*
+ * Description :
+ * Receiving a byte using interrupt instead of polling.
+ */
+void UART_receiveByteAsynchCallBack(void(*ptrfn)(u8));
 
 #endif /* UART_INT_H_ */
