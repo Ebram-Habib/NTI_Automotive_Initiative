@@ -1,7 +1,10 @@
-main.o main.o: ../main.c ../std_types.h ../UART_int.h ../GIE_int.h
+main.o main.o: ../main.c ../std_types.h ../UART_int.h ../GIE_int.h \
+  ../LCD_int.h
 
 ../std_types.h:
 
 ../UART_int.h:
 
 ../GIE_int.h:
+
+../LCD_int.h:

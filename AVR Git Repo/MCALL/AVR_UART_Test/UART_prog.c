@@ -6,7 +6,6 @@
  */
 
 #include "std_types.h"
-#include "common_macros.h"
 #include "UART_int.h"
 #include "UART_config.h"
 #include "UART_priv.h"
@@ -80,7 +79,7 @@ void UART_sendByte(const u8 data)
 	 * UDRE flag is set when the Tx buffer (UDR) is empty and ready for
 	 * transmitting a new byte so wait until this flag is set to one
 	 */
-	while(BIT_IS_CLEAR(UCSRA_REG,UDRE_BIT));
+	while(!(UCSRA_REG & (1<<UDRE_BIT)));
 
 	/*
 	 * Put the required data in the UDR register and it also clear the UDRE flag as
@@ -96,7 +95,7 @@ void UART_sendByte(const u8 data)
 void UART_recieveByteSynchNonBlocking(u8* data)
 {
 	/* RXC flag is set when the UART receive data so wait until this flag is set to one */
-	while(BIT_IS_CLEAR(UCSRA_REG,RXC_BIT));
+	while(!(UCSRA_REG & (1<<RXC_BIT)));
 
 	/*
 	 * Read the received data from the Rx buffer (UDR)
@@ -124,21 +123,11 @@ void UART_sendString(const u8 *Str)
  * Description :
  * Receive the required string until the '#' symbol through UART from the other UART device.
  */
-void UART_receiveString(u8 *Str) // Receive until #
+void UART_receiveStringAsynchCallBack(void(*ptrfn)(u8)) // Receive until #
 
 {
-	/* Receive the first byte */
-		UART_recieveByteSynchNonBlocking(Str);
-
-		/* Receive the whole string until the '#' */
-		while(*Str != '#')
-		{
-			Str++;
-			UART_recieveByteSynchNonBlocking(Str);
-		}
-
-		/* After receiving the whole string plus the '#', replace the '#' with '\0' */
-		*Str = '\0';
+	ptrCallBack = ptrfn;
+	UCSRB_REG |= (1<<RXCIE_BIT);
 }
 
 void UART_receiveByteAsynchCallBack(void(*ptrfn)(u8))

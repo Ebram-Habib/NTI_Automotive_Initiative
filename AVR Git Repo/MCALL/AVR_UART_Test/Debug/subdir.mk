@@ -5,16 +5,25 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../GIE_prog.c \
+../GPIO_Cfg.c \
+../GPIO_Int.c \
+../LCD_prog.c \
 ../UART_prog.c \
 ../main.c 
 
 OBJS += \
 ./GIE_prog.o \
+./GPIO_Cfg.o \
+./GPIO_Int.o \
+./LCD_prog.o \
 ./UART_prog.o \
 ./main.o 
 
 C_DEPS += \
 ./GIE_prog.d \
+./GPIO_Cfg.d \
+./GPIO_Int.d \
+./LCD_prog.d \
 ./UART_prog.d \
 ./main.d 
 

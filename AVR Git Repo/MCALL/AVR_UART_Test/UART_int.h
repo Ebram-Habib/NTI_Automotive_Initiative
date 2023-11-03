@@ -43,7 +43,7 @@ void UART_sendString(const u8 *Str);
  * Description :
  * Receive the required string until the '#' symbol through UART from the other UART device.
  */
-void UART_receiveString(u8 *Str); // Receive until #
+void UART_receiveStringAsynchCallBack(void(*ptrfn)(u8)); // Receive until #
 
 /*
  * Description :
